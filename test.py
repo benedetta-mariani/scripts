@@ -1,15 +1,14 @@
-# author: Dominik Krzeminski (dokato)
+from generate import *
+from dfa import *
 
-import numpy as np
-import matplotlib.pyplot as plt
-import scipy.signal as ss
-
-
-from dfa import dfa
-from generate import power_law_noise
-
-true_exp = float(input('Insert exponent: '))
+true_exp = float(input('Insert true scaling exponent: '))
 x = power_law_noise(2**12, true_exp)
-scales, fluct, alpha = dfa(x)
+scales, fluct, alpha = dfa(x, show = 1)
+print("True scaling exponent: {}".format(true_exp))
+print("Estimated DFA exponent: {}".format(alpha))
+
+
+x = power_law_noise(2**12, true_exp)
+scales, fluct, alpha = dfawithoverlap(x, show = 1, overlap = 50)
 print("True scaling exponent: {}".format(true_exp))
 print("Estimated DFA exponent: {}".format(alpha))
